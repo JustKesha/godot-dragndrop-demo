@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://dth0o7dmpomnx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_68yxw"]
+size = Vector3(0.2, 0.2, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kpw3l"]
+emission_enabled = true
+emission = Color(0.626199, 0.363763, 0.16112, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_7stc3"]
+material = SubResource("StandardMaterial3D_kpw3l")
+radius = 0.15
+height = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xbds6"]
+albedo_color = Color(0.494004, 0.424828, 0.368618, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1dkl3"]
+material = SubResource("StandardMaterial3D_xbds6")
+radius = 0.075
+height = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nfqat"]
+albedo_color = Color(0.752789, 0.681141, 0.625979, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vocum"]
+material = SubResource("StandardMaterial3D_nfqat")
+top_radius = 0.0
+bottom_radius = 0.02
+height = 12.0
+
+[node name="Lamp" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0834577, 0.0422342, 0)
+collision_layer = 4
+collision_mask = 4
+metadata/draggable = true
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_68yxw")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_7stc3")
+
+[node name="Mesh" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.130151, 0)
+mesh = SubResource("CapsuleMesh_1dkl3")
+skeleton = NodePath("../..")
+
+[node name="Mesh" type="MeshInstance3D" parent="Mesh/Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.11354, 0)
+mesh = SubResource("CylinderMesh_vocum")
+
+[node name="Light" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0.799117, 0.513913, 0.27142, 1)

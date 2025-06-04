@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddr8mvdwl2c8l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_npywg"]
+size = Vector3(0.4, 0.5, 0.01)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ce5nu"]
+albedo_color = Color(0.792605, 0.78774, 0.774503, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pentk"]
+material = SubResource("StandardMaterial3D_ce5nu")
+size = Vector3(0.4, 0.5, 0.01)
+
+[node name="Paper" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.246149, 0)
+collision_layer = 4
+collision_mask = 4
+freeze = true
+metadata/draggable = true
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.005)
+shape = SubResource("BoxShape3D_npywg")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.005)
+mesh = SubResource("BoxMesh_pentk")

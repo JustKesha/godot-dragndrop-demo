@@ -1,0 +1,90 @@
+[gd_scene load_steps=9 format=3 uid="uid://bb2b4fntebpai"]
+
+[sub_resource type="GDScript" id="GDScript_os8en"]
+script/source = "extends Node
+
+@onready var animation_player = $Animator
+
+func _on_pickup() -> void:
+	if not animation_player:
+		return
+	
+	print('pick')
+
+func _on_drop(delta: float) -> void:
+	if not animation_player:
+		return
+
+	print('drop')
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1xq1b"]
+size = Vector3(0.5, 0.2, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2wq70"]
+albedo_color = Color(0.760784, 0.517647, 0.368627, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_tgjar"]
+material = SubResource("StandardMaterial3D_2wq70")
+inner_radius = 0.05
+outer_radius = 0.25
+rings = 16
+ring_segments = 12
+
+[sub_resource type="Animation" id="Animation_862r3"]
+length = 0.001
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_cll6l"]
+resource_name = "PICKUP"
+length = 0.25
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1, 1, 1, 0.0666667, 1, 0.85, 0.85, 0.85, 0.233333, 1, 0.8, 0.8, 0.8)
+
+[sub_resource type="Animation" id="Animation_2a12j"]
+resource_name = "DROP"
+length = 0.2
+tracks/0/type = "scale_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.75, 0.75, 0.75, 0.2, 1, 1, 1, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v4m0i"]
+_data = {
+"DROP": SubResource("Animation_2a12j"),
+"PICKUP": SubResource("Animation_cll6l"),
+"RESET": SubResource("Animation_862r3")
+}
+
+[node name="Donut" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+collision_layer = 4
+collision_mask = 5
+script = SubResource("GDScript_os8en")
+metadata/draggable = true
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_1xq1b")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("TorusMesh_tgjar")
+skeleton = NodePath("")
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_v4m0i")
+}

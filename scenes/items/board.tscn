@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://jyaj4knt0mk1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ivocw"]
+size = Vector3(0.75, 0.1, 0.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e5usy"]
+albedo_color = Color(0.505023, 0.367794, 0.263046, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_veken"]
+material = SubResource("StandardMaterial3D_e5usy")
+size = Vector3(0.75, 0.1, 0.6)
+
+[node name="Board" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+collision_layer = 4
+collision_mask = 5
+mass = 5.0
+freeze_mode = 1
+metadata/draggable = true
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ivocw")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_veken")

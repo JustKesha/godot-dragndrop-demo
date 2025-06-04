@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://5t8434o6daug"]
+
+[ext_resource type="Script" path="res://scripts/player_movement.gd" id="1_ot7ot"]
+[ext_resource type="Script" path="res://scripts/player_camera.gd" id="2_kdkj1"]
+[ext_resource type="Script" path="res://scripts/player_drag.gd" id="3_dbqj0"]
+[ext_resource type="Texture2D" uid="uid://claqohd1vrhwg" path="res://sprites/cursor.png" id="4_glgd6"]
+[ext_resource type="Script" path="res://scripts/player_cursor.gd" id="5_u5bii"]
+[ext_resource type="Script" path="res://scripts/player_interactions.gd" id="6_sxesn"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t3heh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i1rgs"]
+albedo_color = Color(0.796184, 0.4191, 0.426103, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8m3mc"]
+material = SubResource("StandardMaterial3D_i1rgs")
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 2
+script = ExtResource("1_ot7ot")
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0297008, -0.00791585, -0.0113263)
+shape = SubResource("CapsuleShape3D_t3heh")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_8m3mc")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+fov = 65.0
+script = ExtResource("2_kdkj1")
+
+[node name="Raycast" type="RayCast3D" parent="Camera"]
+target_position = Vector3(0, 0, -3)
+collision_mask = 5
+script = ExtResource("3_dbqj0")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Cursor" type="TextureRect" parent="UI"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_glgd6")
+script = ExtResource("5_u5bii")
+
+[node name="Interactions" type="Node" parent="."]
+script = ExtResource("6_sxesn")
+
+[connection signal="draggable_hovered" from="Camera/Raycast" to="UI/Cursor" method="_on_raycast_draggable_hovered"]
+[connection signal="draggable_unhovered" from="Camera/Raycast" to="UI/Cursor" method="_on_raycast_draggable_unhovered"]
+[connection signal="started_dragging" from="Camera/Raycast" to="UI/Cursor" method="_on_raycast_started_dragging"]
+[connection signal="started_dragging" from="Camera/Raycast" to="Interactions" method="_on_raycast_started_dragging"]
+[connection signal="stopped_dragging" from="Camera/Raycast" to="Interactions" method="_on_raycast_stopped_dragging"]
