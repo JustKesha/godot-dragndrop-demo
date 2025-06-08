@@ -1,6 +1,6 @@
 # Godot 4 🍩 Drag & Drop 3D - Demo
 
-![preview banner](preview/banner.png)
+![Preview Banner](preview/banner.png)
 
 ### Overview
 
@@ -11,7 +11,9 @@ It includes:
 - Basic first-person controls
 - Pickup / Drop animations
 - On-hover effects
-  
+
+![Preview GIF](preview/preview.gif)
+
 ### Setting up
 
 1. Download this repo
