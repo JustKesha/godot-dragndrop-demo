@@ -12,7 +12,7 @@ It includes:
 - Pickup / Drop animations
 - On-hover effects
 
-![Preview GIF](preview/preview.gif)
+<img alt="Preview Tenor GIF" src="https://media1.tenor.com/m/7aULtCVOahQAAAAd/godot-godot3d.gif" width="49.9%" /> <img alt="Preview Github GIF" src="preview/preview.gif" width="49.5%" />
 
 ### Setting up
 
