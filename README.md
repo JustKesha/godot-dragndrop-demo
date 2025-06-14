@@ -4,15 +4,26 @@
 
 ### Overview
 
-This is a Godot 4 demo 3D project for my drag & drop module ([repository](https://github.com/JustKesha/godot-dragndrop-3d))<br>
-Feel free to use it as a starting point for your projects
+This is a Godot 4 demo 3D project for my drag & drop module ([repository](https://github.com/JustKesha/godot-dragndrop-3d)),<br>
+Feel free to use it as a starting point for your projects!
 
-It includes:
+The demo includes:
 - Basic first-person controls
-- Pickup / Drop animations
+- Simple animations
 - On-hover effects
 
 <img alt="Preview Tenor GIF" src="https://media1.tenor.com/m/7aULtCVOahQAAAAd/godot-godot3d.gif" width="49.9%" /> <img alt="Preview Github GIF" src="preview/preview.gif" width="49.5%" />
+
+### Functionality
+
+The drag and drop module is highly customizable and handles things like:
+- Zoom
+- Physics based dragging (optionally)
+- Chargeable throws
+- Angle stabilisation
+- Jam handling
+
+For more details, go to the [module repository](https://github.com/JustKesha/godot-dragndrop-3d).
 
 ### Setting up
 
@@ -34,4 +45,4 @@ To chance drag & drop settings:
 2. Select the `Raycast` node under `Camera` in the Scene tab
 4. In the Inspector tab you will see all available controls right under the `DragAndDrop3D` class
 
-For more info see the [scripts/player_drag.gd](scripts/player_drag.gd) script
+For more info see the [scripts/player_drag.gd](scripts/player_drag.gd) script.
